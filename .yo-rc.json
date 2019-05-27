@@ -28,7 +28,7 @@
     "clientThemeVariant": "dark",
     "useSass": true,
     "clientPackageManager": "npm",
-    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "testFrameworks": ["gatling", "protractor"],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",

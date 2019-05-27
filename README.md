@@ -19,9 +19,8 @@ We use npm scripts and [Webpack][] as our build system.
 Run the following commands in two separate terminals to create a blissful development experience where your browser
 auto-refreshes when files change on your hard drive.
 
-    mvnw
+    ./mvnw
     npm start
-    docker-compose -f src/main/docker/elasticsearch.yml up -d
 
 Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
 specifying a newer version in [package.json](package.json). You can also run `npm update` and `npm install` to manage dependencies.
@@ -94,7 +93,7 @@ will generate few files:
 
 To build the final jar and optimize the blackshields application for production, run:
 
-    mvnw -Pprod clean verify
+    ./mvnw -Pprod clean verify
 
 This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
 To ensure everything worked, run:
@@ -109,13 +108,13 @@ Refer to [Using JHipster in production][] for more details.
 
 To package your application as a war in order to deploy it to an application server, run:
 
-    mvnw -Pprod,war clean verify
+    ./mvnw -Pprod,war clean verify
 
 ## Testing
 
 To launch your application's tests, run:
 
-    mvnw verify
+    ./mvnw verify
 
 ### Client tests
 
@@ -130,7 +129,7 @@ For more information, refer to the [Running tests page][].
 Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
 
 ```
-  docker-compose -f src/main/docker/sonar.yml up -d
+docker-compose -f src/main/docker/sonar.yml up -d
 ```
 
 You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
@@ -138,13 +137,13 @@ You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqu
 Then, run a Sonar analysis:
 
 ```
-mvnw -Pprod clean verify sonar:sonar
+./mvnw -Pprod clean verify sonar:sonar
 ```
 
 If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
 
 ```
-mvnw initialize sonar:sonar
+./mvnw initialize sonar:sonar
 ```
 
 or
@@ -168,48 +167,11 @@ To achieve this, first build a docker image of your app by running:
 
     ./mvnw -Pprod verify jib:dockerBuild
 
-or if it fails:
-
-    mvnw clean package -Pprod jib:exportDockerContext && docker build -t myimage target/jib-docker-context
-
 Then run:
 
     docker-compose -f src/main/docker/app.yml up -d
 
 For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-###Common Docker Commands
-
-List the containers
-You can use
-  
- docker container ps -a
-to list all the containers
-
-###Docker stats for containers
-
-    docker container stats
-
-###Scale a container
-
-    Run docker-compose scale test-app=4
-
-to have 4 instances of application “test” running.
-
-###Stop containers
-
-    docker-compose -f src/main/docker/app.yml stop
-
-You can also use directly Docker:
-
-    docker container stop <container_id>
-
-When you stop a container, the data is not deleted, unless you delete the container.
-
-Delete a container
-Be careful! All data will be deleted:
-
-    docker container rm <container_id>
 
 ## Continuous Integration (optional)
 
