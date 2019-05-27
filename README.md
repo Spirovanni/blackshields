@@ -94,7 +94,7 @@ will generate few files:
 
 To build the final jar and optimize the blackshields application for production, run:
 
-    ./mvnw -Pprod clean verify
+    mvnw -Pprod clean verify
 
 This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
 To ensure everything worked, run:
