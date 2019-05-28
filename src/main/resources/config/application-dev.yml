@@ -34,6 +34,7 @@ spring:
   devtools:
     restart:
       enabled: true
+      additional-exclude: .h2.server.properties
     livereload:
       enabled: false # we use Webpack dev server + BrowserSync for livereload
   jackson:
@@ -41,20 +42,18 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/blackshields?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
+    url: jdbc:h2:file:./target/h2db/db/blackshields;DB_CLOSE_DELAY=-1
+    username: blackshields
     password:
     hikari:
       poolName: Hikari
       auto-commit: false
-      data-source-properties:
-        cachePrepStmts: true
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        useServerPrepStmts: true
+  h2:
+    console:
+      enabled: false
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    database: MYSQL
+    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    database: H2
     show-sql: true
     properties:
       hibernate.id.new_generator_mappings: true
@@ -106,7 +105,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: ZjcyZDU5ODA5YzRjOTlmYWIxZDJhMzBjZjgzODdkMGZlZTRiNGEzZTdkMjA2N2ZjM2EwNTVmN2RmY2I2NjcwYzc4Mzk3YzM4MWQ1ZGM1ODZlZmVkMTM3OWNjYjRjMDUxZWZkYjE2OGVlNjQ3MjQ2OTI4ODNlYmFlYWI2YzliNzI=
+        base64-secret: ZWEyYmYwN2FjZTRiNTFmMWZiZjk5NWM1MTg3ZWY2YWY0OTc0YmRhOTc1MWVjNTRjYThmOTk0NDY3YzEyYjVkZmY3M2YwYjY4N2EwZWM1MmQ0ZDVhYzc5MWM1ZTI3MThjMTYwOWEwMjQwMDI2NWNlMDM1YzYxYmZlNzJiOWFhOTg=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
