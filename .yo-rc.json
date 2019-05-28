@@ -38,6 +38,8 @@
     "languages": ["en", "es"],
     "appsFolders": ["blackshields"],
     "directoryPath": "../",
-    "monitoring": "no"
+    "monitoring": "no",
+    "herokuAppName": "blackshields",
+    "herokuDeployType": "git"
   }
 }
