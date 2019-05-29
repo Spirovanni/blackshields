@@ -816,7 +816,7 @@
                                 <resource>
                                     <directory>${project.basedir}/target</directory>
                                     <includes>
-                                        <include>${project.build.finalName}.jar</include>
+                                        <include>*.jar</include>
                                     </includes>
 <!--                                    <directory>$blackshields/target</directory>-->
 <!--                                    <includes>-->
