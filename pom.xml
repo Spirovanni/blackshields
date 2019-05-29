@@ -795,6 +795,38 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.microsoft.azure</groupId>
+                    <artifactId>azure-webapp-maven-plugin</artifactId>
+                    <!-- check Maven Central for the latest version -->
+                    <version>1.6.0</version>
+                    <configuration>
+                        <schemaVersion>v2</schemaVersion>
+                        <resourceGroup>black-shield</resourceGroup>
+                        <appName>blackshields</appName>
+                        <runtime>
+                            <os>Linux</os>
+                            <javaVersion>java11</javaVersion>
+                            <webContainer>tomcat 8.5</webContainer>
+                        </runtime>
+                        <pricingTier>F1</pricingTier>
+                        <region>West US</region>
+                        <deployment>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/target</directory>
+                                    <includes>
+                                        <include>${project.build.finalName}.jar</include>
+                                    </includes>
+<!--                                    <directory>$blackshields/target</directory>-->
+<!--                                    <includes>-->
+<!--                                        <include>$blackshields-0.0.1-SNAPSHOT.jar</include>-->
+<!--                                    </includes>-->
+                                </resource>
+                            </resources>
+                        </deployment>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
